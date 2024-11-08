@@ -24,6 +24,8 @@ function cadastroDoAluno(nome, idade) {
     }
 }
 
+//Parte Antiga só funciona no console
+
 function listarAlunosMaiores() {
         alunosMaiores.forEach(aluno => console.log(`O aluno de Nome ${aluno.nome} com a Idade de ${aluno.idade} anos, ${aluno.resposta}`))
 }
@@ -56,7 +58,45 @@ cadastroDoAluno("Julia", 23)
 cadastroDoAluno("Joana", 13)
 
 
-listarTodosAlunos()
+//listarTodosAlunos()
 
 //console.log(alunosMenores)
 //console.log(alunosMaiores)
+
+
+
+//Parte Nova com HTML e CSS
+
+const nomeHTML = document.getElementById("Nome")
+const idadeHTML = document.getElementById("Idade")
+
+const resultadoHTML = document.getElementById("resultado")
+const formularioHTML = document.getElementById("formulario")
+
+
+function listarAlunos() {
+    let lista = "<h1>Alunos Maiores de Idade:</h1>"
+    alunosMaiores.forEach(aluno => {
+        lista += `<p>O aluno de Nome ${aluno.nome} com a Idade de ${aluno.idade} anos, ${aluno.resposta}</p>`
+    })
+
+    lista += "<h1>Alunos Menores de Idade:</h1>"
+    alunosMenores.forEach(aluno => {
+        lista += `<p>O aluno de Nome ${aluno.nome} com a Idade de ${aluno.idade} anos, ${aluno.resposta}</p>`
+    })
+
+    resultadoHTML.innerHTML = lista
+}
+
+formularioHTML.addEventListener("submit", function(event) {
+    event.preventDefault()
+    const nome = nomeHTML.value
+    const idade = parseInt(idadeHTML.value)
+
+    cadastroDoAluno(nome, idade)
+    listarAlunos()
+
+    nomeHTML.value = ""
+    idadeHTML.value = ""
+});
+
